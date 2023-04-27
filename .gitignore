@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+venv/
+backups.py
+.replit
+index.html
+
