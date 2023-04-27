@@ -7,7 +7,7 @@ import pprint
 
 # Импорт и подготовка датафрейма
 wine_list = pd.read_excel(
-    io='data/wine3.xlsx',
+    io='data/wine.xlsx',
     names=['category', 'label', 'grade', 'price', 'image', 'promo']
 ).fillna('')
 
