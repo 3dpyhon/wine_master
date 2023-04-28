@@ -3,6 +3,7 @@ __pycache__/
 venv/
 .vscode/
 backups.py
+functions.py
 .replit
 index.html
 *.pyc
