@@ -19,25 +19,24 @@ def generate_year_form(year: int) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Path to data")
-    parser.add_argument('path', nargs='?', type=str, default='data/', help='Path to .xlsx file')
-    parser.add_argument('filename', nargs='?', type=str, default='wine.xlsx', help='Name of the file')
+    parser.add_argument('path', nargs='?', type=str, default='data/wine.xlsx', help='Path to .xlsx file')
     args = parser.parse_args()
 
-    data = pd.read_excel(
-        io=args.path + args.filename,
+    products = pd.read_excel(
+        io=args.path,
         names=['category', 'label', 'grade', 'price', 'image', 'promo']
     ).fillna('')
 
-    data['image'] = data['image'].apply(func=lambda x: 'images/' + x)
+    products['image'] = products['image'].apply(func=lambda x: 'images/' + x)
 
-    data = data.to_dict(orient='records')
+    products = products.to_dict(orient='records')
     products_by_category = defaultdict(list)
 
-    for entry in data:
-        products_by_category[entry['category']].append(entry)
+    for product in products:
+        products_by_category[product['category']].append(product)
 
-    foundation_date = dt.datetime(year=1920, month=1, day=1)
-    years_passed = relativedelta(dt.datetime.today(), foundation_date).years
+    foundation_date = dt.date(year=1920, month=1, day=1)
+    years_passed = dt.date.today().year - foundation_date.year
 
     env = Environment(
         loader=FileSystemLoader('.'),
